@@ -10,12 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_01_140225) do
+ActiveRecord::Schema.define(version: 2020_07_01_172313) do
+
+  create_table "user_sign_up_form_input_values", force: :cascade do |t|
+    t.integer "user_sign_up_form_input_id"
+    t.integer "user_id"
+    t.string "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_sign_up_form_input_values_on_user_id"
+    t.index ["user_sign_up_form_input_id", "user_id"], name: "usufi_id_and_user_id_index", unique: true
+    t.index ["user_sign_up_form_input_id"], name: "usufi_id_index"
+  end
 
   create_table "user_sign_up_form_inputs", force: :cascade do |t|
     t.string "input_name"
     t.boolean "required"
     t.string "type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
